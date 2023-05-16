@@ -3,6 +3,14 @@ import copy
 from board import boards
 import pygame
 import math
+
+import argparse
+parse = argparse.ArgumentParser()
+parse.add_argument("-t", "--type", type=int, choices=[0,1,2], help="Select set of questions.\n0 - Geography\n1 - Science\n2 - Mathematics")
+args = parse.parse_args()
+sets = ['geography.csv', 'science.csv', 'math.csv']
+print(sets[args.type])
+
 import random
 import csv
 game_q = {}
@@ -12,7 +20,7 @@ answer_key_3 = ''
 
 
 ##	QUESTION GENERATOR
-with open('questions.csv') as csvfile:
+with open(sets[args.type]) as csvfile:
 	questions = csv.reader(csvfile, delimiter=',')
 	compiled = {}
 	for row in questions:
